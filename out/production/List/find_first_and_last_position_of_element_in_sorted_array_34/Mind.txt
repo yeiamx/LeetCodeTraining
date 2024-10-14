@@ -1,5 +1,0 @@
-可以拆分为使用二分法寻找目标数在数组内的左、右边界
-寻找边界（left）：
-    定义leftBorder = -1
-    nums[middle] = target时更新leftBorder = middle, 继续搜索[left, middle - 1]
-    如果跳出时leftBorder = -1说明数组内不存在该数

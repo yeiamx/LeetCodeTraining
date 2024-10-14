@@ -1,0 +1,16 @@
+分2种情况，目标值在数组内可搜索到、搜索不到
+搜索不到时，可分两种情况：最后一次定位到的数比目标值大或小
+目标值搜索不到时：
+    左闭右闭时，最后一次进入循环体left=right，assume as lastTryIndex.
+    if (nums[lastTryIndex] > target) {
+        left = lastTryIndex; right = lastTryIndex - 1;
+        最后一个定位到的数比目标数大，那目标数往前插，插入的下标为lastTryIndex
+    }
+
+    if (nums[lastTryIndex] < target) {
+        left = lastTryIndex + 1; right = lastTryIndex;
+        最后一个定位到的数比目标数小，那目标数往后插，插入的下标为lastTryIndex + 1
+    }
+    所以可以统一为right + 1;
+
+

@@ -1,0 +1,5 @@
+解题思路：
+快慢指针
+慢指针指向新数组的最后一位
+nums[fast] != nums[fast + 1]: slow = slow + 1 nums[slow] = nums[fast]
+else: fast-> next unrepeated num index; slow = slow + 1; nums[slow] = nums[fast];
