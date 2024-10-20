@@ -1,0 +1,15 @@
+解题思路：
+答案是求解长度最小地连续区间长度，其实就是求解最小的区间。即找到一个目标start,end
+暴力法即遍历所有的start-end，O(n^2)
+其实我们可以遍历所有的end即可
+首先我们找到第一个cur_end，使得sum[0, cur_end] >= target,此时数组中 < cur_end的下标都不可能是目标end，因为区间和不可能大于target
+然后我们找到cur_end为尾标的长度最小子数组。即cur_start遍历[0-cur_end]，然后sum[0, cur_end]依次减去num[cur_start],
+若发现<target,则说明[cur_start,cur_end]为当前end的最小连续子数组
+
+接下来很精髓，以知下标cur_end的最小子数组为[cur_start, cur_end],数组和为sum. 能够求出以cur_end+1为尾标的最小子数组的start吗？
+1.以cur_end+1为尾标的最小子数组的start不可能在[0,cur_start]中,因为简单可证这样区间长度大于了[cur_start, cur_end]
+2.因此我们只需要在[cur_start+1, cur_end+1]中遍历start, 同样维护当前区间和来找到新的[cur_start, cur_end].
+
+可以看到，这种算法cur_end遍历了n次，cur_start是不断向前走的，同时sum也是常数时间进行维护
+因此时间复杂度O(n)
+

@@ -1,0 +1,9 @@
+解题思路：
+先解释下题目：找到一个最长的连续子区间，子区间内的数字种类（types）<=2
+遍历所有的end
+第一个cur_end：[0,cur_end]:types=2.[0, cur_end+1]:types=3(if cur_end=len-1-> return len-1).
+这样可以排除end=[0,cur_end-1].
+
+[cur_start, cur_end]:types=2 => cur_end+1时
+if num[cur_end+1]加入后types还是2，那cur_start不动
+否则cur_start一直加，直到types=2为止，这样就又构成了[cur_start, cur_end]:types=2
