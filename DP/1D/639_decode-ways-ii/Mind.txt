@@ -1,0 +1,27 @@
+解题思路：
+状态：dp[i] -> s[i,...]的解码方法总数
+转移：
+dp[len] = 1 : 为前面的方案定型
+dp[i]:
+s[i] = 0 -> dp[i] = 0
+
+s[i] = '1' - '9' -> dp[i] += 1 * dp[i + 1]
+s[i] = '*' -> dp[i] += 9 * dp[i + 1]
+
+s[i]s[i+1]=
+ num num
+    s[i]s[i+1] is legal -> dp[i] += 1 * dp[i + 2]
+ *   num
+    num = '0' - '6'时, count = 2;
+    num = '7' - '9'时, count = 1;
+    dp[i] += count * dp[i + 2]
+ num *
+    if num > 2 count = 0;
+    if num == 2 count = 6;
+    if num == 1 count = 9;
+    dp[i] += count * dp[i + 2];
+ *   *
+    First * has to be '1' or '2';So ['1', '1'-'9'] or ['2', '1'-'6'] total 9 + 6 = 15;
+    dp[i] += 15 * dp[i + 2];
+
+

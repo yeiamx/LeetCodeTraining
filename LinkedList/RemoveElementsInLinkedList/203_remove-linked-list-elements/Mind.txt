@@ -1,0 +1,5 @@
+解题思路：
+当删除头节点时，需要做特殊处理：newHead = head->next; head->next = null; return newHead;
+而使用虚拟头节点（头节点前面再加一个节点作为头）可以实现统一化的删除操作
+dummyNode -> head -> ...
+最后返回dummyNode->next即可
