@@ -1,0 +1,8 @@
+解题思路：
+状态：dp[k][i][j] 从(i,j)出发，走K步后的存活概率
+
+转移：dp[k][i][j] = SUM(dp[k-1][(八个方向的点)] * 1/8)
+
+边界：k == 0时，dp = 1 (i,j in range)
+k > 0时 i,j out of range dp = 0
+
