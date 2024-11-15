@@ -1,0 +1,28 @@
+解题思路：
+易得ans范围:[0, sum(batteries)],全是劣质零电量battery，或者把battery耗完。
+f(m)：给定一个分钟数m，看n台电脑在给定batteries下能不能撑过m分钟
+根据题意，我们的目标就是找到最大的m满足f(m) = true;
+而f有明显的单调性：m越大，越难撑。
+
+因此可以二分
+if f(mid) = true, record mid. search in (mid + 1, right)
+if f(mid) = false search in (left, mid - 1)
+
+f(m):
+首先如果有batteries[i] > m,那么它的归宿就是为某台电脑执行完m分钟，然后报废。
+我们的目标就是物尽其用，batteries[i]最多只能使用m分钟(m时刻开始，任何的执行都是无意义的)，那自然是让它在一个电脑上执行完m分钟
+那我们不妨先执行完这样的“超额”电池，让batteries只剩下<= m的“碎片”电池
+通过画图，对于“碎片”电池，我们对它们的利用率可以达到100%。可以得到以下结论if sum(batteries) >= nLeft * m , return true;
+
+优化：
+看一个问题：我们取max(batteries) = max, 且sum(batteries) >= n * max, n台电脑一定能同时运行?分钟呢。
+这个？可以是max吗，可以，因为此时所有电池都是碎片，由上述结论可得n台电脑一定能同时运行max分钟。
+那这个?可以更大吗，maybe，如果更大，电池也都还是碎片。而保证了碎片条件的同时，只要sum(batteries) >= n * ?成立就行。
+因此我们只要找到满足sum(batteries) >= n * ?的?最大值即可，即sum / n;
+
+反之如果sum(batteries) < n * max,
+n台电脑一定不能同时运行max，max+1，max+2分钟，因为在全碎片情况下，电池100%利用了也达不到目标时间。
+那ans不就<max
+从而缩小了二分范围。
+
+

@@ -1,0 +1,8 @@
+解题思路：
+能量E范围[minH, maxH]
+
+f(E) -> 给定起始E能否完成。
+我们可以通过寻找f(E)=true的E的左边界来找到答案，因为f这个函数具备一次性排除一半答案的性质
+if midE ok E>midE一定能完成， lets see [l, midE-1] if has better res
+if midE no [l, midE]一定no, lets see[midE+1, r].
+

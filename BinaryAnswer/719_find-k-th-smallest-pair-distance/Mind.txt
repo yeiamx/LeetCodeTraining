@@ -1,0 +1,20 @@
+解题思路：
+对nums排序不影响结果。
+ans的范围[0, max(nums) - min(nums)]
+
+f(nums, distance)：给定一个数对距离distance, 输出nums中小于该数对距离的数对个数
+如果存在distance让f(nums, distance) = k-1，说明nums数组中小于distance的数对个数为k-1
+而ans一定是满足f(nums, distance) = k-1的最大值，因为若存在f(ans) >= k 则小于ans的数对个数至少有k个，那ans不就至少对应着第k+1小的数对距离了。
+而f又具备单调性，那我们二分找f(distance)<=k-1时distance的右边界即可
+
+f：滑动窗口 目标是遍历l，找到以nums[l]为第一个数的 满足要求的数对
+if nums[r] - nums[l] < dis nums[r+1] - nums[l] >= dis
+由于nums排好序的
+right = r+1, r+2...都不用考虑了, 一定大于等于
+以nums[l]为第一个数的 满足要求的数对的个数即为r-l
+left -> l+1
+r = l+2...r也都不用考虑了，一定小于
+r -> r + 1
+
+
+
