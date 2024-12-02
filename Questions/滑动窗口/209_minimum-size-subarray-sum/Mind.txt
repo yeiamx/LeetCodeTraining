@@ -1,0 +1,4 @@
+解题思路：
+
+if [l, r] is sub answer of nums[r].
+for nums[r+1], L >= l.

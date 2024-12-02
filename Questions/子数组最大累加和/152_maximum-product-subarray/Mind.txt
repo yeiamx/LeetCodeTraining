@@ -1,0 +1,13 @@
+解题思路：
+max[i] = 以nums[i]结尾的子数组的最大乘积
+min[i] = 以nums[i]结尾的子数组的最小乘积
+以nums[i]为结尾的子数组：
+    1.仅包含nums[i]: max[i] = num[i] = min[i]
+    2.包含nums[i]和前面若干个：
+        nums[i] > 0:
+            max[i] = nums[i] * max[i - 1]
+            min[i] = nums[i] * min[i - 1]
+        nums[i] < 0:
+            max[i] = nums[i] * min[i - 1]
+            min[i] = nums[i] * max[i - 1]
+所以max[i] = max(1, 2) min[i] = min(1, 2).

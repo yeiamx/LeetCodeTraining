@@ -1,0 +1,16 @@
+解题思路：
+设有函数我们只需找出nums中 数字种类<= k的子数组总数，f(nums,k)
+则题解为f(nums, k) - f(nums, k - 1)
+
+f:search every r, find its longest l to make [l..r] types == k. res += r - l + 1. ([r], [r-1..r], [r-2..r], ..., [l..r])
+
+1.find first r makes [0..r]  = k.
+res += r
+
+2.Knowing [l..r] is the longest subarray ended by r. Look at r+1, find its L
+if Added r+1 makes type still k.
+    L = l.
+L cantbe < l, because then [l..r] is not the longest subarray ended by r.
+if Added r+1 makes type == k + 1.
+    L start from l to right, check if abandon L can make types in [L+1..r+1] == k.
+res+=

@@ -1,0 +1,6 @@
+解题思路：
+用一个pre代表dp[i-1]
+l=0 r=0 sum = nums[0] max = sum
+更新时pre >= 0 pre = pre + nums[i]; compare to max
+更新时pre < 0 pre = nums[i]; compare to max
+if findNewMax update l & r

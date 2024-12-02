@@ -1,4 +1,3 @@
-
 // 接取落水的最小花盆
 // 老板需要你帮忙浇花。给出 N 滴水的坐标，y 表示水滴的高度，x 表示它下落到 x 轴的位置
 // 每滴水以每秒1个单位长度的速度下落。你需要把花盆放在 x 轴上的某个位置
@@ -17,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StreamTokenizer;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
 
@@ -30,7 +30,7 @@ public class Main {
 
     public static int[] minDeque = new int[MAXN];
 
-    public static int maxh, maxt, minh, mint;
+    public static int maxHead, maxTail, minHead, minTail;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -55,6 +55,55 @@ public class Main {
     }
 
     public static int compute() {
+        int ans = Integer.MAX_VALUE;
+        // arr[0...n-1][2]: x(0), 高度(1)
+        // 所有水滴根据x排序，谁小谁在前
+        Arrays.sort(arr, 0, n, Comparator.comparingInt(a -> a[0]));
+
+        int l ,r = 0;
+        maxHead = 0; maxTail = 0;
+        Arrays.fill(maxDeque, 0);
+        minHead = 0; minTail = 0;
+        Arrays.fill(minDeque, 0);
+
+        for (int L = 0; L < n; L++) {
+            l = L;
+            outDeque(l);
+            // Search R start from r makes Array[L, R] satisfied.
+            int R = r;
+            while (R < n && maxOfWindow(arr) - minOfWindow(arr) < d) {
+                inDeque(arr, R++);
+            }
+            if ((maxOfWindow(arr) - minOfWindow(arr) >= d)) {
+                r = R;
+                ans = Math.min(ans, arr[r - 1][0] - arr[l][0]);
+            } else {
+                break;
+            }
+        }
+        return ans;
+
     }
 
+
+    // Put index of nums[index] into deque.
+    private static void inDeque(int[][] nums, int index) {
+        while (maxTail > maxHead && nums[maxDeque[maxTail - 1]][1] <= nums[index][1]) maxTail--;
+        maxDeque[maxTail++] = index;
+        while (minTail > minHead && nums[minDeque[minTail - 1]][1] >= nums[index][1]) minTail--;
+        minDeque[minTail++] = index;
+    }
+
+    // Get expired index out of deque( < left).
+    private static void outDeque(int left) {
+        while (maxHead < maxTail && maxDeque[maxHead] < left) maxHead++;
+        while (minHead < minTail && minDeque[minHead] < left) minHead++;
+    }
+    private static int maxOfWindow(int[][] nums) {
+        return maxHead < maxTail ? nums[maxDeque[maxHead]][1] : 0;
+    }
+
+    private static int minOfWindow(int[][] nums) {
+        return minHead < minTail ? nums[minDeque[minHead]][1] : 0;
+    }
 }

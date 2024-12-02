@@ -1,0 +1,20 @@
+解题思路：
+遍历所有的nums[i], 讨论以nums[i]为结尾的子数组。找到最短合法子数组。最后遍历i取最短
+
+先算出sum(nums), 得出%p余数mod_all
+要删掉一段子数组sub:nums[k+1..i]使得剩余和%p=0（被p整除）,mod_sub = mod_all
+设此时的sum(nums[0..i]) % p = mod_cur_prefix
+此时nums的前缀nums[0..k] % p = mod_k_prefix应等于
+    if mod_cur_prefix >= mod_all : mod_cur_prefix - mod_all
+    if mod_cur_prefix < mod_all : mod_cur_prefix + p - mod_all
+例：两块sum为s1 s2。
+IF s2 % p = 3， (s1 + s2) % p = 4; 那么明显s1%p = 1
+IF s2 % p = 5， (s1%p + s2%p) % p = 4 => (s1%p + s2%p) = 4 + p, s1%p = 4 + p - s2%p
+
+即我们在确定了i之后,需要找到一个最大的k,(k<i), 使得nums[0..k] % p = 某个通过上述算法得出的mod_k.
+因此我们只需记录某个mod, 它在nums里可以通过的最长的前缀和nums[0..j] % p得到的下标j.
+
+注意不要直接算preSum，会超int，利用同余定理去算mod
+
+
+

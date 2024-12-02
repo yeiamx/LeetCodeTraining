@@ -31,6 +31,7 @@ class Solution {
                 nums[y] += matrix[x][y];
             }
         }
+
         int[] subArray = maxSubArray(nums);
         res[1] = subArray[0]; res[3] = subArray[1]; res[4] = subArray[2];
         return res;

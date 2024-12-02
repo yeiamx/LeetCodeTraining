@@ -1,0 +1,11 @@
+解题思路：
+
+已知s[l..r]不重复
+s[r+1] = ch，
+if add ch to s[l..r] unrepeated， then ans of r+1 = s[l..r] + ch
+else L of r+1 cant be L < l, because it'll cause repeated in [L, r].
+So let's look into where L should be in [l..r]
+它应该为在[l..r]中ch的下标k加1.
+
+
+
