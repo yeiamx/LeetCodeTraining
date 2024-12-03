@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/DP/前缀信息/303_range-sum-query-immutable" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DP/前缀信息/未排序数组中累加和为给定值的最长子数组长度" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Questions/子数组最大累加和/子序列累加和必须被7整除的最大累加和" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
